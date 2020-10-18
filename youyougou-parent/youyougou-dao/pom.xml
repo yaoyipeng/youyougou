@@ -32,10 +32,10 @@
             <artifactId>mybatis-plus-generator</artifactId>
             <version>3.3.1.tmp</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.miemiedev</groupId>
             <artifactId>mybatis-paginator</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- MySql -->
         <dependency>
             <groupId>mysql</groupId>
