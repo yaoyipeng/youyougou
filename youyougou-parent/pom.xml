@@ -150,11 +150,11 @@
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis.spring.version}</version>
             </dependency>
-            <!--<dependency>
+            <dependency>
                 <groupId>com.github.miemiedev</groupId>
                 <artifactId>mybatis-paginator</artifactId>
                 <version>${mybatis.paginator.version}</version>
-            </dependency>-->
+            </dependency>
             <!-- MySql -->
             <dependency>
                 <groupId>mysql</groupId>
