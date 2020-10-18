@@ -21,7 +21,8 @@
     <!-- 集中定义依赖版本号 -->
     <properties>
         <junit.version>4.12</junit.version>
-        <spring.version>4.2.4.RELEASE</spring.version>
+<!--        <spring.version>4.2.4.RELEASE</spring.version>-->
+        <spring.version>5.0.5.RELEASE</spring.version>
         <pagehelper.version>4.0.0</pagehelper.version>
         <servlet-api.version>2.5</servlet-api.version>
         <dubbo.version>2.8.4</dubbo.version>
@@ -115,7 +116,7 @@
             <dependency>
                 <groupId>org.javassist</groupId>
                 <artifactId>javassist</artifactId>
-                <version>3.21.0-GA</version>
+                <version>3.22.0-GA</version>
             </dependency>
             <!--<dependency>
                 <groupId>javassist</groupId>
