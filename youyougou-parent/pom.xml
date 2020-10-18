@@ -133,11 +133,11 @@
                 <version>2.5</version>
                 <scope>provided</scope>
             </dependency>
-            <!--<dependency>
+            <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper</artifactId>
                 <version>${pagehelper.version}</version>
-            </dependency>-->
+            </dependency>
             <!-- Mybatis -->
             <dependency>
                 <groupId>org.mybatis</groupId>
