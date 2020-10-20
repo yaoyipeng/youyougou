@@ -14,6 +14,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.yyg.heaven</groupId>
             <artifactId>youyougou-pojo</artifactId>
             <version>0.0.1-SNAPSHOT</version>
