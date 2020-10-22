@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.yyg.heaven.pojo.TbBrand;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -56,4 +57,9 @@ public interface ITbBrandService extends IService<TbBrand> {
      * @return
      */
     PageInfo findPage(TbBrand brand, int pageNum,int pageSize);
+    /**
+     * 查询品牌下拉列表数据
+     * @return
+     */
+    List<Map> selectOptionList();
 }

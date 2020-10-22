@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yyg.heaven.mapper.TbBrandMapper">
 
+    <select id="selectOptionList"  resultType="java.util.Map" >
+         select id,name as text from tb_brand
+    </select>
+
 </mapper>

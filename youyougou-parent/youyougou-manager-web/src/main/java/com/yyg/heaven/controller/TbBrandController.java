@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -115,6 +116,16 @@ public class TbBrandController {
     public PageInfo search(@RequestBody TbBrand brand,
                            @RequestParam(name = "page",required = true,defaultValue = "1") int page,
                                    @RequestParam(name = "rows",required = true,defaultValue = "10") int rows){
+        System.out.println("sear");
         return tbBrandService.findPage(brand, page, rows);
+    }
+
+    /**
+     * 查询品牌下拉列表数据
+     * @return
+     */
+    @RequestMapping("/selectOptionList")
+    public List<Map> selectOptionList(){
+        return tbBrandService.selectOptionList();
     }
 }

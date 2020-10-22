@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -32,6 +33,10 @@ public class TbSpecification implements Serializable {
      */
     @TableField("spec_name")
     private String specName;
-
+    /**
+     * 对应多个规格表
+     */
+    @TableField(exist = false)
+    private List<TbSpecificationOption> specificationOptionList;
 
 }

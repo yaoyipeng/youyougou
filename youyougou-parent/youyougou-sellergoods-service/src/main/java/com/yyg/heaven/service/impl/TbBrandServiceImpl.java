@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -103,6 +104,14 @@ public class TbBrandServiceImpl extends ServiceImpl<TbBrandMapper, TbBrand> impl
         List<TbBrand> tbBrands = tbBrandMapper.selectList(queryWrapper);
         PageInfo pageInfo = new PageInfo(tbBrands);
         return pageInfo;
+    }
+    /**
+     * 查询品牌下拉列表数据
+     * @return
+     */
+    @Override
+    public List<Map> selectOptionList() {
+        return tbBrandMapper.selectOptionList();
     }
 
 
