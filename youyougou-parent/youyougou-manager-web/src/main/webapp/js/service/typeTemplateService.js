@@ -26,7 +26,7 @@ app.service("typeTemplateService",function($http){
 
     //根据ID查询
     this.findOne=function(id){
-        return $http.get("../typeTemplate/findOne.do?id="+id);
+        return $http.get("../typeTemplate/findOne/"+id+".do");
     }
 
     //批量删除

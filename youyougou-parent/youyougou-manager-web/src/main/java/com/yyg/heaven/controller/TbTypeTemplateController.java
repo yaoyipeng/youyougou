@@ -81,8 +81,8 @@ public class TbTypeTemplateController {
      * @param id
      * @return
      */
-    @GetMapping("/findOne.do")
-    public TbTypeTemplate findOne(Long id){
+    @GetMapping("/findOne/{id}")
+    public TbTypeTemplate findOne(@PathVariable(value = "id") Long id){
         return tbTypeTemplateService.getById(id);
     }
     /**
