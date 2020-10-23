@@ -35,6 +35,12 @@
 		<property name="typeAliasesPackage" value="com.yyg.heaven.pojo" />-->
 		<!-- 加载mybatis的全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml" />
+		<property name="plugins">
+			<!--注册mybatisplus分页插件-->
+			<list>
+				<bean class="com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor" />
+			</list>
+		</property>
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.yyg.heaven.mapper" />

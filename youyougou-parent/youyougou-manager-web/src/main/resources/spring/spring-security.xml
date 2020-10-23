@@ -30,6 +30,7 @@
             <!--设置框架页的策略为SAMEORIGIN-->
             <security:frame-options policy="SAMEORIGIN"/>
         </security:headers>
+        <security:logout/>
     </security:http>
     <!-- 认证管理器 -->
     <security:authentication-manager>
@@ -40,6 +41,7 @@
             </security:user-service>
         </security:authentication-provider>
     </security:authentication-manager>
-
+    <bean id="bcryptEncoder"
+          class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 
 </beans>

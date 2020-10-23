@@ -27,12 +27,6 @@ app.controller('baseController' ,function($scope){
         }
     }
 
-    //重新加载列表 数据
-    $scope.reloadList=function(){
-        //条件查询并分页condition
-        $scope.search( $scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
-    }
-
     //提取json字符串数据中某个属性，返回拼接字符串 逗号分隔
     $scope.json2str=function(jsonString,key){
         var json=JSON.parse(jsonString);//将json字符串转换为json对象
@@ -44,5 +38,11 @@ app.controller('baseController' ,function($scope){
             value+=json[i][key];
         }
         return value;
+    }
+
+    //重新加载列表 数据
+    $scope.reloadList=function(){
+        //条件查询并分页condition
+        $scope.search( $scope.paginationConf.currentPage, $scope.paginationConf.itemsPerPage);
     }
 });

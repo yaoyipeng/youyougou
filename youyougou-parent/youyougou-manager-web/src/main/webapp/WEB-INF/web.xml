@@ -10,6 +10,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
 
+  <!-- spring-security -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring/spring-security.xml</param-value>
