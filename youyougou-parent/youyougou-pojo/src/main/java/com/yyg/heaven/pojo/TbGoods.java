@@ -7,10 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
- * 
+ * 商品SPU实体类
  * </p>
  *
  * @author YingYew
@@ -116,6 +117,16 @@ public class TbGoods implements Serializable {
      */
     @TableField("is_delete")
     private String isDelete;
+    /**
+     * 商品扩展
+     */
+    @TableField(exist = false)
+    private TbGoodsDesc goodsDesc;
+    /**
+     * 商品SKU列表
+     */
+    @TableField(exist = false)
+    private List<TbItem> itemList;
 
 
 }

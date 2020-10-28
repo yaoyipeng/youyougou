@@ -114,5 +114,13 @@ public class TbTypeTemplateController {
                            @RequestBody TbTypeTemplate typeTemplate){
         return tbTypeTemplateService.findPageLike(typeTemplate, page, rows);
     }
+    /**
+     * 查询类型下拉列表数据
+     * @return
+     */
+//    @GetMapping("/selectOptionList")
+//    public List<Map> selectOptionList(){
+//        return tbTypeTemplateService.selectOptionList();
+//    }
 
 }

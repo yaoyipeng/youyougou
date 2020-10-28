@@ -59,4 +59,12 @@ public class TbTypeTemplateServiceImpl extends ServiceImpl<TbTypeTemplateMapper,
         PageInfo pageInfo = new PageInfo(tbTypeTemplates);
         return pageInfo;
     }
+    /**
+     * 查询类型下拉列表数据
+     * @return
+     */
+//    @Override
+//    public List<Map> selectOptionList() {
+//        return tbTypeTemplateMapper.selectOptionList();
+//    }
 }

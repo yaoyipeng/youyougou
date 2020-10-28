@@ -28,4 +28,9 @@ public interface ITbTypeTemplateService extends IService<TbTypeTemplate> {
      * @return
      */
     PageInfo findPageLike(TbTypeTemplate typeTemplate, int page, int rows);
+    /**
+     * 查询类型下拉列表数据
+     * @return
+     */
+//    List<Map> selectOptionList();
 }

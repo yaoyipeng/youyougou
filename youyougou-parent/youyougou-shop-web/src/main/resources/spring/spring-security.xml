@@ -52,5 +52,4 @@
     <dubbo:registry address="zookeeper://192.168.25.132:2181"/>
     &lt;!&ndash; 相当于一个bean &ndash;&gt;
     <dubbo:reference id="sellerService" interface="com.yyg.heaven.service.ITbSellerService" />-->
-
 </beans>

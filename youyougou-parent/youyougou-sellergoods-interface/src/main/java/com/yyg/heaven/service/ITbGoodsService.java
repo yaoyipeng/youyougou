@@ -13,4 +13,8 @@ import com.yyg.heaven.pojo.TbGoods;
  */
 public interface ITbGoodsService extends IService<TbGoods> {
 
+    /**
+     * 增加
+     */
+    void add(TbGoods goods);
 }
