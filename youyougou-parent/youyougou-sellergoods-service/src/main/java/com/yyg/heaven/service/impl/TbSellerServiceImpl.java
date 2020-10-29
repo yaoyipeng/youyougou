@@ -34,6 +34,10 @@ public class TbSellerServiceImpl extends ServiceImpl<TbSellerMapper, TbSeller> i
     public Page<TbSeller> findPageLike(int page, int rows, TbSeller tbSeller) {
         QueryWrapper<TbSeller> queryWrapper = new QueryWrapper<>();
         if (tbSeller!=null){
+            // 根据状态查询
+            if (tbSeller.getStatus()!=null && tbSeller.getStatus().length()>0){
+                queryWrapper.eq("status",tbSeller.getStatus());
+            }
             // 判断公司名称是否为空
             if (tbSeller.getName()!=null && tbSeller.getName().length()>0){
                 queryWrapper.like("name","%"+tbSeller.getName()+"%");

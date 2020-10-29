@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.github.pagehelper.PageInfo;
 import com.yyg.heaven.pojo.TbTypeTemplate;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  *  服务类
@@ -28,9 +31,17 @@ public interface ITbTypeTemplateService extends IService<TbTypeTemplate> {
      * @return
      */
     PageInfo findPageLike(TbTypeTemplate typeTemplate, int page, int rows);
+
     /**
      * 查询类型下拉列表数据
      * @return
      */
-//    List<Map> selectOptionList();
+    List<Map> selectOptionList();
+
+    /**
+     * 返回规格列表
+     * @param id
+     * @return
+     */
+    List<Map> findSpecList(Long id);
 }

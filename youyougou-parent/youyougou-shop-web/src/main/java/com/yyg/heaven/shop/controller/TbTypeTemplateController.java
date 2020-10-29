@@ -1,4 +1,4 @@
-package com.yyg.heaven.controller;
+package com.yyg.heaven.shop.controller;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
@@ -123,5 +123,13 @@ public class TbTypeTemplateController {
     public List<Map> selectOptionList(){
         return tbTypeTemplateService.selectOptionList();
     }
-
+    /**
+     * 查询规格列表
+     * @param id
+     * @return
+     */
+    @GetMapping("findSpecList/{id}")
+    public List<Map> findSpecList(@PathVariable(value = "id") Long id){
+        return tbTypeTemplateService.findSpecList(id);
+    }
 }

@@ -33,8 +33,6 @@ public class TbGoodsController {
         String sellerId = SecurityContextHolder.getContext().getAuthentication().getName();
         // 设置商家ID
         goods.setSellerId(sellerId);
-        // 设置未申请状态
-        goods.setAuditStatus("0");
         try {
             tbGoodsService.add(goods);
             return new Result(true, "增加成功");

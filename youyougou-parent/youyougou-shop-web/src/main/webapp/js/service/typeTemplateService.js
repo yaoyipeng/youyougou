@@ -44,4 +44,8 @@ app.service("typeTemplateService",function($http){
         return $http.get('../typeTemplate/selectOptionList.do');
     }
 
+    //查询规格列表
+    this.findSpecList=function(id){
+        return $http.get('../typeTemplate/findSpecList/'+id+'.do');
+    }
 });

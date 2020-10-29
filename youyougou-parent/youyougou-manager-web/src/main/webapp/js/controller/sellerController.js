@@ -55,10 +55,10 @@ app.controller('sellerController' ,function($scope,$controller,sellerService){
         );
     }
 
-    $scope.searchEntity1={};//定义搜索对象
+    $scope.searchEntity={};//定义搜索对象
     //条件查询
     $scope.search=function(page,rows){
-        sellerService.search(page,rows, $scope.searchEntity1).success(
+        sellerService.search(page,rows, $scope.searchEntity).success(
             function(response){
                 $scope.paginationConf.totalItems=response.total;//总记录数
                 $scope.list=response.records;//给列表变量赋值

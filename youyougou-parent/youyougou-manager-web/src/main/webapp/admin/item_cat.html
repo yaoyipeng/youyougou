@@ -17,20 +17,21 @@
 
 	<script type="text/javascript" src="../plugins/angularjs/angular.min.js">  </script>
 	<script type="text/javascript" src="../js/base.js">  </script>
-<!--	<script type="text/javascript" src="../js/service/typeTemplateService.js">  </script>-->
 	<script type="text/javascript" src="../js/service/itemCatService.js">  </script>
+	<script type="text/javascript" src="../js/service/typeTemplateService.js">  </script>
 	<script type="text/javascript" src="../js/controller/baseController.js">  </script>
 	<script type="text/javascript" src="../js/controller/itemCatController.js">  </script>
 	<!--引入select2-->
-	<!--<link rel="stylesheet" href="../plugins/select2/select2.css" />
+	<link rel="stylesheet" href="../plugins/select2/select2.css" />
 	<link rel="stylesheet" href="../plugins/select2/select2-bootstrap.css" />
 	<script src="../plugins/select2/select2.min.js" type="text/javascript"></script>
-	<script type="text/javascript" src="../plugins/select2/angular-select2.js">  </script>-->
+	<script type="text/javascript" src="../plugins/select2/angular-select2.js">  </script>
     
 </head>
 
 <body class="hold-transition skin-red sidebar-mini"
-	  ng-app="youyougou" ng-controller="itemCatController" ng-init="findByParentId(0)">
+	  ng-app="youyougou" ng-controller="itemCatController"
+	  ng-init="findTypeList();findByParentId(0)" >
   <!-- .box-body -->
                 
                     <div class="box-header with-border">
@@ -137,10 +138,11 @@
 		      	<tr>
 		      		<td>类型模板</td>
 		      		<td>	      		
-		      			<input select2 config="options['type_template']" placeholder="商品类型模板" class="form-control" type="text"
-							   ng-model="entity.typeId"/>
-						<!--<input select2 select2-model="entity.typeId"  config="typeTemplateList" multiple placeholder=" 选择分类（可多选） "
-							   class="form-control" type="text">-->
+		      			<!--<input select2 config="options['name']" placeholder="商品类型模板" class="form-control" type="text"
+							   select2-model="entity.typeId" ng-model="entity.typeId"/>-->
+						<select select2 ng-model="entity.typeId" class="form-control" placeholder="商品类型模板">
+							<option value="{{ item.id }}" ng-repeat="item in optionsList">{{ item.name }}</option>
+						</select>
 		      		</td>
 		      	</tr>		      	
 			 </table>				

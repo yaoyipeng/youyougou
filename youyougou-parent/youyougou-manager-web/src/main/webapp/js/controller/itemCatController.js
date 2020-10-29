@@ -1,8 +1,17 @@
 // 分类控制层
-app.controller('itemCatController' ,function($scope,$controller,itemCatService){
+app.controller('itemCatController' ,function($scope,$controller,itemCatService,typeTemplateService){
 
     $controller('baseController',{$scope:$scope});//继承
 
+    // 商品类型
+    // $scope.optionsList={};
+    $scope.findTypeList=function(){
+        typeTemplateService.selectOptionList().success(
+            function(response){
+                $scope.optionsList=response;
+            }
+        );
+    }
 
     $scope.grade=1;//默认为1级
     //设置级别
@@ -76,4 +85,5 @@ app.controller('itemCatController' ,function($scope,$controller,itemCatService){
             }
         });
     }
+
 });
