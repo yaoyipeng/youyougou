@@ -8,6 +8,7 @@ import com.yyg.heaven.mapper.TbSellerMapper;
 import com.yyg.heaven.pojo.TbSeller;
 import com.yyg.heaven.service.ITbSellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 2020-10-17
  */
 @Service
+@Transactional
 public class TbSellerServiceImpl extends ServiceImpl<TbSellerMapper, TbSeller> implements ITbSellerService {
 
     @Autowired

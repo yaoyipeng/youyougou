@@ -23,6 +23,15 @@ public class TbItemCatController {
 
     @Reference
     private ITbItemCatService tbItemCatService;
+
+    /**
+     * 查询全部
+     * @return
+     */
+    @GetMapping("findAll")
+    public List<TbItemCat> findAll(){
+        return tbItemCatService.list();
+    }
     /**
      * 根据上级ID查询列表分类
      * @param parentId

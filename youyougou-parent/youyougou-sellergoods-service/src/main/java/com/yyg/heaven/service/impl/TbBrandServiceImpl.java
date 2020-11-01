@@ -9,6 +9,7 @@ import com.yyg.heaven.mapper.TbBrandMapper;
 import com.yyg.heaven.pojo.TbBrand;
 import com.yyg.heaven.service.ITbBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.Map;
  * @since 2020-10-17
  */
 @Service
+@Transactional
 public class TbBrandServiceImpl extends ServiceImpl<TbBrandMapper, TbBrand> implements ITbBrandService {
 
     @Autowired

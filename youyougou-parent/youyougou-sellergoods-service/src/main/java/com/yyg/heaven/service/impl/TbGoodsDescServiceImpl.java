@@ -6,6 +6,7 @@ import com.yyg.heaven.mapper.TbGoodsDescMapper;
 import com.yyg.heaven.pojo.TbGoodsDesc;
 import com.yyg.heaven.service.ITbGoodsDescService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 2020-10-17
  */
 @Service
+@Transactional
 public class TbGoodsDescServiceImpl extends ServiceImpl<TbGoodsDescMapper, TbGoodsDesc> implements ITbGoodsDescService {
 
     @Autowired

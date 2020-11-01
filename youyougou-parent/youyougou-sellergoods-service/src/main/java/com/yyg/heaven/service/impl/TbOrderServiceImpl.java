@@ -6,6 +6,7 @@ import com.yyg.heaven.mapper.TbOrderMapper;
 import com.yyg.heaven.pojo.TbOrder;
 import com.yyg.heaven.service.ITbOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 2020-10-17
  */
 @Service
+@Transactional
 public class TbOrderServiceImpl extends ServiceImpl<TbOrderMapper, TbOrder> implements ITbOrderService {
 
     @Autowired

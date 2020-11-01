@@ -21,5 +21,8 @@ app.service('itemCatService',function($http){
     this.delete=function(ids){
         return $http.post('../itemCat/delete.do?ids='+ids);
     }
-
+    // 查询全部
+    this.findAll=function(){
+        return $http.get('../itemCat/findAll.do');
+    }
 });

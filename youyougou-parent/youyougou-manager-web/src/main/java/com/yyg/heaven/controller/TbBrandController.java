@@ -116,7 +116,6 @@ public class TbBrandController {
     public PageInfo search(@RequestBody TbBrand brand,
                            @RequestParam(name = "page",required = true,defaultValue = "1") int page,
                                    @RequestParam(name = "rows",required = true,defaultValue = "10") int rows){
-        System.out.println("sear");
         return tbBrandService.findPage(brand, page, rows);
     }
 

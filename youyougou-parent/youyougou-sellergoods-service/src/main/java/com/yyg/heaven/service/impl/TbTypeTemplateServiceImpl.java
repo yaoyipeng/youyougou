@@ -12,6 +12,7 @@ import com.yyg.heaven.pojo.TbSpecificationOption;
 import com.yyg.heaven.pojo.TbTypeTemplate;
 import com.yyg.heaven.service.ITbTypeTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @since 2020-10-17
  */
 @Service
+@Transactional
 public class TbTypeTemplateServiceImpl extends ServiceImpl<TbTypeTemplateMapper, TbTypeTemplate> implements ITbTypeTemplateService {
 
     @Autowired

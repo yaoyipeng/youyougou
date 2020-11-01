@@ -25,7 +25,16 @@
 
 	<!-- 引用dubbo 服务 -->
 	<dubbo:application name="youyougou-manager-web" />
+	<!--设置客户端请求超时时间-->
+	<dubbo:consumer timeout="10000"  />
 	<dubbo:registry address="zookeeper://192.168.25.130:2181"/>
 	<dubbo:annotation package="com.yyg.heaven.controller" />
 
+	<!-- 配置多媒体解析器 -->
+	<bean id="multipartResolver"
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 设定文件上传的最大值 5MB，5*1024*1024 -->
+		<property name="maxUploadSize" value="5242880"></property>
+	</bean>
 </beans>

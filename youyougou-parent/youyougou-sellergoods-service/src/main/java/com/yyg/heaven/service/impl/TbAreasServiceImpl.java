@@ -6,6 +6,7 @@ import com.yyg.heaven.mapper.TbAreasMapper;
 import com.yyg.heaven.pojo.TbAreas;
 import com.yyg.heaven.service.ITbAreasService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @since 2020-10-17
  */
 @Service
+@Transactional
 public class TbAreasServiceImpl extends ServiceImpl<TbAreasMapper, TbAreas> implements ITbAreasService {
 
     @Autowired

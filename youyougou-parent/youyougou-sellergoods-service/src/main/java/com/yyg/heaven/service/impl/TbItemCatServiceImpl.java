@@ -7,6 +7,7 @@ import com.yyg.heaven.mapper.TbItemCatMapper;
 import com.yyg.heaven.pojo.TbItemCat;
 import com.yyg.heaven.service.ITbItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import java.util.List;
  * @since 2020-10-17
  */
 @Service
+@Transactional
 public class TbItemCatServiceImpl extends ServiceImpl<TbItemCatMapper, TbItemCat> implements ITbItemCatService {
 
     @Autowired
