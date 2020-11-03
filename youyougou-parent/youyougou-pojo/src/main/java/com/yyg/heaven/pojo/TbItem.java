@@ -5,9 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.solr.core.mapping.Dynamic;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * <p>
@@ -27,12 +30,14 @@ public class TbItem implements Serializable {
     /**
      * 商品id，同时也是商品编号
      */
+    @Field
     @TableId(value = "id",type = IdType.AUTO)
     private Long id;
 
     /**
      * 商品标题
      */
+    @Field("item_title")
     @TableField("title")
     private String title;
 
@@ -45,6 +50,7 @@ public class TbItem implements Serializable {
     /**
      * 商品价格，单位为：元
      */
+    @Field("item_price")
     @TableField("price")
     private Float price;
     @TableField("stock_count")
@@ -65,6 +71,7 @@ public class TbItem implements Serializable {
     /**
      * 商品图片
      */
+    @Field("item_image")
     @TableField("image")
     private String image;
 
@@ -99,20 +106,28 @@ public class TbItem implements Serializable {
     private Float marketPrice;
     @TableField("is_default")
     private String isDefault;
+    @Field("item_goodsid")
     @TableField("goods_id")
     private Long goodsId;
     @TableField("seller_id")
     private String sellerId;
     @TableField("cart_thumbnail")
     private String cartThumbnail;
+    @Field("item_category")
     @TableField("category")
     private String category;
+    @Field("item_brand")
     @TableField("brand")
     private String brand;
     @TableField("spec")
     private String spec;
+    @Field("item_seller")
     @TableField("seller")
     private String seller;
 
+    @Dynamic
+    @Field("item_spec_*")
+    @TableField(exist = false)
+    private Map<String,String> specMap;
 
 }

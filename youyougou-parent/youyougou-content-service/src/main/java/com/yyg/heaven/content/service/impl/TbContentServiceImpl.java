@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -50,6 +51,46 @@ public class TbContentServiceImpl extends ServiceImpl<TbContentMapper, TbContent
         }
         return contentList;
     }
+    /**
+     * 添加
+     * @param tbContent
+     * @return
+     */
+    @Override
+    public void add(TbContent tbContent) {
+        tbContentMapper.insert(tbContent);
+        //清除缓存
+        redisTemplate.boundHashOps("content").delete(tbContent.getCategoryId());
+    }
+    /**
+     * 修改
+     * @param tbContent
+     * @return
+     */
+    @Override
+    public void updateTbContentById(TbContent tbContent) {
+        //查询修改前的分类Id
+        Long categoryId = tbContentMapper.selectById(tbContent.getId()).getCategoryId();
+        redisTemplate.boundHashOps("content").delete(categoryId);
+        tbContentMapper.updateById(tbContent);
+        //如果分类ID发生了修改,清除修改后的分类ID的缓存
+        if(categoryId.longValue()!=tbContent.getCategoryId().longValue()){
+            redisTemplate.boundHashOps("content").delete(tbContent.getCategoryId());
+        }
+    }
+    /**
+     * 批量删除
+     * @return
+     */
+    @Override
+    public void deleteByIds(Long[] ids) {
+        for (Long id : ids) {
+            //清除缓存
+            Long categoryId = tbContentMapper.selectById(id).getCategoryId();//广告分类ID
+            redisTemplate.boundHashOps("content").delete(categoryId);
+        }
+        tbContentMapper.deleteBatchIds(Arrays.asList(ids));
+    }
 
-    
+
 }

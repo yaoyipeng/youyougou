@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-
 /**
  * <p>
  *  前端控制器
@@ -51,9 +49,7 @@ public class TbContentController {
     @PostMapping("add")
     public Result add(@RequestBody TbContent tbContent){
         try {
-            tbContentService.save(tbContent);
-            //清除缓存
-            redisTemplate.boundHashOps("content").delete(tbContent.getCategoryId());
+            tbContentService.add(tbContent);
             return new Result(true, "增加成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -69,14 +65,7 @@ public class TbContentController {
     @PostMapping("update")
     public Result update(@RequestBody TbContent tbContent){
         try {
-            //查询修改前的分类Id
-            Long categoryId = tbContentService.getById(tbContent.getId()).getCategoryId();
-            redisTemplate.boundHashOps("content").delete(categoryId);
-            tbContentService.updateById(tbContent);
-            //如果分类ID发生了修改,清除修改后的分类ID的缓存
-            if(categoryId.longValue()!=tbContent.getCategoryId().longValue()){
-                redisTemplate.boundHashOps("content").delete(tbContent.getCategoryId());
-            }
+            tbContentService.updateTbContentById(tbContent);
             return new Result(true, "修改成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -101,12 +90,7 @@ public class TbContentController {
     @PostMapping("delete")
     public Result delete(Long [] ids){
         try {
-            for (Long id : ids) {
-                //清除缓存
-                Long categoryId = tbContentService.getById(id).getCategoryId();//广告分类ID
-                redisTemplate.boundHashOps("content").delete(categoryId);
-            }
-            tbContentService.removeByIds(Arrays.asList(ids));
+            tbContentService.deleteByIds(ids);
             return new Result(true, "删除成功");
         } catch (Exception e) {
             e.printStackTrace();

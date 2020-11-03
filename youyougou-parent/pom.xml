@@ -18,6 +18,10 @@
         <module>youyougou-content-interface</module>
         <module>youyougou-content-service</module>
         <module>youyougou-portal-web</module>
+        <module>youyougou-solr-util</module>
+        <module>youyougou-search-interface</module>
+        <module>youyougou-search-service</module>
+        <module>youyougou-search-web</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -42,7 +46,7 @@
         <freemarker.version>2.3.23</freemarker.version>
         <activemq.version>5.11.2</activemq.version>
         <security.version>5.0.3.RELEASE</security.version>
-        <solrj.version>4.10.3</solrj.version>
+        <solrj.version>6.6.1</solrj.version>
         <ik.version>2012_u6</ik.version>
     </properties>
 
@@ -109,7 +113,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.9</version>
+                <version>4.12</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>

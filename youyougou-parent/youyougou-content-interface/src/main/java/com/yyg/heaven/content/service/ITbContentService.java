@@ -20,4 +20,21 @@ public interface ITbContentService extends IService<TbContent> {
      * @return
      */
     List<TbContent> findByCategoryId(Long categoryId);
+    /**
+     * 添加
+     * @param tbContent
+     * @return
+     */
+    void add(TbContent tbContent);
+    /**
+     * 修改
+     * @param tbContent
+     * @return
+     */
+    void updateTbContentById(TbContent tbContent);
+    /**
+     * 批量删除
+     * @return
+     */
+    void deleteByIds(Long[] ids);
 }
