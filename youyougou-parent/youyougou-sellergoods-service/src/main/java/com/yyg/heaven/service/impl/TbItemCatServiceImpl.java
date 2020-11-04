@@ -7,6 +7,7 @@ import com.yyg.heaven.mapper.TbItemCatMapper;
 import com.yyg.heaven.pojo.TbItemCat;
 import com.yyg.heaven.service.ITbItemCatService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -27,6 +28,9 @@ public class TbItemCatServiceImpl extends ServiceImpl<TbItemCatMapper, TbItemCat
 
     @Autowired
     private TbItemCatMapper tbItemCatMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
     /**
      * 根据上级ID查询列表分类
      * @param parentId
@@ -41,6 +45,12 @@ public class TbItemCatServiceImpl extends ServiceImpl<TbItemCatMapper, TbItemCat
         QueryWrapper<TbItemCat> queryWrapper = new QueryWrapper<>(tbItemCat);
 //        QueryWrapper<TbItemCat> queryWrapper = new QueryWrapper<>();
 //        queryWrapper.eq("parent_id",parentId);
+        //每次执行查询的时候，一次性读取缓存进行存储 (因为每次增删改都要执行此方法)
+        List<TbItemCat> list = tbItemCatMapper.selectList(null);
+        for(TbItemCat itemCat:list){
+            redisTemplate.boundHashOps("itemCat").put(itemCat.getName(), itemCat.getTypeId());
+        }
+        System.out.println("将模板id放入缓存。。。");
         // 根据条件查询并返回
         return tbItemCatMapper.selectList(queryWrapper);
     }

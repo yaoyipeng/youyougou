@@ -18,7 +18,7 @@
 		<script src="/js/controller/searchController.js"></script>
 	</head>
 
-	<body ng-app="youyougou" ng-controller="searchController" ng-init="search()">
+	<body ng-app="youyougou" ng-controller="searchController">
 		<!-- 头部栏位 -->
 		<!--页面顶部-->
 		<div id="nav-bottom">
@@ -81,7 +81,7 @@
 									<form action="" class="sui-form form-inline">
 										<!--searchAutoComplete-->
 										<div class="input-append">
-											<input type="text" ng-model="entity.keywords" id="autocomplete" type="text" class="input-error input-xxlarge" />
+											<input type="text" ng-model="searchMap.keywords" id="autocomplete" type="text" class="input-error input-xxlarge" />
 											<button class="sui-btn btn-xlarge btn-danger" ng-click="search()" type="button">搜索</button>
 										</div>
 									</form>
@@ -149,53 +149,41 @@
 			<div class="bread">
 				<ul class="fl sui-breadcrumb">
 					<li>
-						<a href="#">全部结果</a>
+						<a href="#">搜索条件</a>
 					</li>					
-					<li class="active">智能手机</li>					
+					<!--<li class="active">智能手机</li>	-->
 				</ul>
 				<ul class="tags-choose">
-					<li class="tag">全网通<i class="sui-icon icon-tb-close"></i></li>
-					<li class="tag">63G<i class="sui-icon icon-tb-close"></i></li>
+					<li class="tag" ng-if="searchMap.category!=''" ng-click="removeSearchItem('category')">商品分类：{{searchMap.category}}<i class="sui-icon icon-tb-close"></i></li>
+					<li class="tag" ng-if="searchMap.brand!=''" ng-click="removeSearchItem('brand')">品牌：{{searchMap.brand}}<i class="sui-icon icon-tb-close"></i></li>
+					<li class="tag" ng-repeat="(key,value) in searchMap.spec" ng-click="removeSearchItem(key)">{{key}}:{{value}}<i class="sui-icon icon-tb-close"></i></li>
 				</ul>
-				<form class="fl sui-form form-dark">
+				<!--<form class="fl sui-form form-dark">
 					<div class="input-control control-right">
 						<input type="text" />
 						<i class="sui-icon icon-touch-magnifier"></i>
 					</div>
-				</form>
+				</form>-->
 				<div class="clearfix"></div>
 			</div>
 			<!--selector-->
 			<div class="clearfix selector">
-				<div class="type-wrap">
+				<div class="type-wrap" ng-if="list.categoryList!=null && searchMap.category==''">
 					<div class="fl key">商品分类</div>
 					<div class="fl value">
-						<a href="#">手机</a>  <a href="#">电视</a>
+                        <span ng-repeat="category in list.categoryList">
+						    <a href="#" ng-click="addSearchItem('category',category)">{{category}}</a>
+                        </span>
 					</div>
 					<div class="fl ext"></div>
 				</div>
-				<div class="type-wrap logo">
+				<div class="type-wrap logo" ng-if="list.brandList!=null && searchMap.brand==''">
 					<div class="fl key brand">品牌</div>
 					<div class="value logos">
 						<ul class="logo-list">
-							<li><img src="img/_/phone01.png" /></li>
-							<li><img src="img/_/phone02.png" /></li>
-							<li><img src="img/_/phone03.png" /></li>
-							<li><img src="img/_/phone04.png" /></li>
-							<li><img src="img/_/phone05.png" /></li>
-							<li><img src="img/_/phone06.png" /></li>
-							<li><img src="img/_/phone07.png" /></li>
-							<li><img src="img/_/phone08.png" /></li>
-							<li><img src="img/_/phone09.png" /></li>
-							<li><img src="img/_/phone10.png" /></li>
-							<li><img src="img/_/phone11.png" /></li>
-							<li><img src="img/_/phone12.png" /></li>
-							<li><img src="img/_/phone13.png" /></li>
-							<li><img src="img/_/phone14.png" /></li>
-							<li><img src="img/_/phone05.png" /></li>
-							<li><img src="img/_/phone06.png" /></li>
-							<li><img src="img/_/phone07.png" /></li>
-							<li><img src="img/_/phone02.png" /></li>
+							<li ng-repeat="brand in list.brandList">
+								<a href="#" ng-click="addSearchItem('brand',brand.text)">{{brand.text}}</a>
+							</li>
 						</ul>
 					</div>
 					<div class="ext">
@@ -203,39 +191,12 @@
 						<a href="javascript:void(0);">更多</a>
 					</div>
 				</div>
-				<div class="type-wrap">
-					<div class="fl key">网络制式</div>
+				<div class="type-wrap" ng-repeat="spec in list.specList" ng-if="searchMap.spec[spec.text]==null">
+					<div class="fl key">{{spec.text}}</div>
 					<div class="fl value">
 						<ul class="type-list">
-							<li>
-								<a>GSM（移动/联通2G）</a>
-							</li>
-							<li>
-								<a>电信2G</a>
-							</li>
-							<li>
-								<a>电信3G</a>
-							</li>
-							<li>
-								<a>移动3G</a>
-							</li>
-							<li>
-								<a>联通3G</a>
-							</li>
-							<li>
-								<a>联通4G</a>
-							</li>
-							<li>
-								<a>电信3G</a>
-							</li>
-							<li>
-								<a>移动3G</a>
-							</li>
-							<li>
-								<a>联通3G</a>
-							</li>
-							<li>
-								<a>联通4G</a>
+							<li ng-repeat="pojo in spec.options">
+								<a href="#"  ng-click="addSearchItem(spec.text,pojo.optionName)">{{pojo.optionName}}</a>
 							</li>
 						</ul>
 					</div>
@@ -355,7 +316,7 @@
 				</div>
 				<div class="goods-list">
 					<ul class="yui3-g">
-						<li class="yui3-u-1-5" ng-repeat="item in list">
+						<li class="yui3-u-1-5" ng-repeat="item in list.rows">
 							<div class="list-wrap">
 								<div class="p-img">
 									<a href="item.html" target="_blank"><img ng-src="{{item.image}}"  /></a>
@@ -366,8 +327,8 @@
 											<i>{{item.price}}</i>
 										</strong>
 								</div>
-								<div class="attr">
-									<em>{{item.title}}</em>
+								<div class="attr" ng-bind-html="item.title | trustHtml">
+									<!--<em>{{item.title}}</em>-->
 								</div>
 								<div class="cu">
 									<em></em>
