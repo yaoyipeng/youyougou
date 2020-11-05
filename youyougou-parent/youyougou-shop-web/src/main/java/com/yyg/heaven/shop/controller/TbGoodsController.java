@@ -5,10 +5,12 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yyg.heaven.entity.Result;
 import com.yyg.heaven.pojo.TbGoods;
+import com.yyg.heaven.search.service.ItemSearchService;
 import com.yyg.heaven.service.ITbGoodsService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -25,6 +27,8 @@ public class TbGoodsController {
 
     @Reference
     private ITbGoodsService tbGoodsService;
+    @Reference
+    private ItemSearchService itemSearchService;
 
     /**
      * 批量逻辑删除
@@ -40,6 +44,7 @@ public class TbGoodsController {
                 tbGoods.setId(id);
                 tbGoodsService.updateById(tbGoods);
             }
+            itemSearchService.deleteByGoodsIds(Arrays.asList(ids));
             return new Result(true, "删除成功");
         } catch (Exception e) {
             e.printStackTrace();

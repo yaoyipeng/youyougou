@@ -111,6 +111,11 @@
         </dependency>
         <dependency>
             <groupId>com.yyg.heaven</groupId>
+            <artifactId>youyougou-search-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yyg.heaven</groupId>
             <artifactId>youyougou-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>

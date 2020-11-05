@@ -5,6 +5,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yyg.heaven.entity.Result;
 import com.yyg.heaven.pojo.TbGoods;
+import com.yyg.heaven.pojo.TbItem;
+import com.yyg.heaven.search.service.ItemSearchService;
 import com.yyg.heaven.service.ITbGoodsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +27,8 @@ public class TbGoodsController {
     @Reference
     private ITbGoodsService tbGoodsService;
 
+    @Reference
+    private ItemSearchService itemSearchService;
     /**
      * 批量逻辑删除
      * @param ids
@@ -39,6 +43,7 @@ public class TbGoodsController {
                 tbGoods.setId(id);
                 tbGoodsService.updateById(tbGoods);
             }
+//            itemSearchService.deleteByGoodsIds(Arrays.asList(ids));
             return new Result(true, "删除成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,6 +146,16 @@ public class TbGoodsController {
             for (Long id : ids) {
                 tbGoods.setId(id);
                 tbGoodsService.updateById(tbGoods);
+            }
+            //按照SPU ID查询 SKU列表(状态为1)
+            if(status.equals("1")){//审核通过
+                List<TbItem> itemList = tbGoodsService.findItemListByGoodsIdandStatus(ids, status);
+                //调用搜索接口实现数据批量导入
+                if(itemList.size()>0){
+                    itemSearchService.importList(itemList);
+                }else{
+                    System.out.println("没有明细数据");
+                }
             }
             return new Result(true, "成功");
         } catch (Exception e) {

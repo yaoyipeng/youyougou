@@ -82,6 +82,19 @@ public class TbGoodsServiceImpl extends ServiceImpl<TbGoodsMapper, TbGoods> impl
         // 调用添加商品下的items方法
         addItems(tbGoods);
     }
+    /**
+     * 根据商品ID和状态查询Item表信息
+     * @param goodsIds
+     * @param status
+     * @return
+     */
+    @Override
+    public List<TbItem> findItemListByGoodsIdandStatus(Long[] goodsIds, String status) {
+        QueryWrapper<TbItem> tbItemQueryWrapper = new QueryWrapper<>();
+        tbItemQueryWrapper.eq("status",status);
+        tbItemQueryWrapper.in("goods_id", goodsIds);
+        return tbItemMapper.selectList(tbItemQueryWrapper);
+    }
 
     /**
      * 根据条件分页查询

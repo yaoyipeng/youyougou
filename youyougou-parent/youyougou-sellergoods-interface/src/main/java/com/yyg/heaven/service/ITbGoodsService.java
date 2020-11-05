@@ -3,6 +3,9 @@ package com.yyg.heaven.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.yyg.heaven.pojo.TbGoods;
+import com.yyg.heaven.pojo.TbItem;
+
+import java.util.List;
 
 /**
  * <p>
@@ -38,5 +41,11 @@ public interface ITbGoodsService extends IService<TbGoods> {
      * @return
      */
     void updateTbGoods(TbGoods tbGoods);
-
+    /**
+     * 根据商品ID和状态查询Item表信息
+     * @param goodsIds
+     * @param status
+     * @return
+     */
+    List<TbItem> findItemListByGoodsIdandStatus(Long[] goodsIds, String status );
 }
