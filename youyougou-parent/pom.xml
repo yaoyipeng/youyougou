@@ -22,6 +22,9 @@
         <module>youyougou-search-interface</module>
         <module>youyougou-search-service</module>
         <module>youyougou-search-web</module>
+        <module>youyougou-page-interface</module>
+        <module>youyougou-page-service</module>
+        <module>youyougou-page-web</module>
     </modules>
     <packaging>pom</packaging>
 

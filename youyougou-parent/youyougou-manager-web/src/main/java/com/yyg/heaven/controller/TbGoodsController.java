@@ -4,6 +4,7 @@ package com.yyg.heaven.controller;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yyg.heaven.entity.Result;
+import com.yyg.heaven.page.service.ItemPageService;
 import com.yyg.heaven.pojo.TbGoods;
 import com.yyg.heaven.pojo.TbItem;
 import com.yyg.heaven.search.service.ItemSearchService;
@@ -29,6 +30,19 @@ public class TbGoodsController {
 
     @Reference
     private ItemSearchService itemSearchService;
+
+    @Reference(timeout=40000)
+    private ItemPageService itemPageService;
+
+    /**
+     * 生成静态页（测试）
+     * @param goodsId
+     */
+    @RequestMapping("/genHtml")
+    public void genHtml(Long goodsId){
+        itemPageService.genItemHtml(goodsId);
+    }
+
     /**
      * 批量逻辑删除
      * @param ids
@@ -155,6 +169,10 @@ public class TbGoodsController {
                     itemSearchService.importList(itemList);
                 }else{
                     System.out.println("没有明细数据");
+                }
+                //静态页生成
+                for(Long goodsId:ids){
+                    itemPageService.genItemHtml(goodsId);
                 }
             }
             return new Result(true, "成功");
