@@ -1,6 +1,5 @@
 package com.yyg.heaven.page.service.impl;
 
-import com.alibaba.dubbo.config.annotation.Service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yyg.heaven.mapper.TbGoodsDescMapper;
 import com.yyg.heaven.mapper.TbGoodsMapper;
@@ -14,8 +13,10 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -76,6 +77,27 @@ public class ItemPageServiceImpl implements ItemPageService {
 			template.process(dataModel, out);
 			out.close();
 			return true;			
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	/**
+	 * 删除商品详细页
+	 * @param goodsId
+	 * @return
+	 */
+	@Override
+	public boolean deleteItemHtml(Long[] goodsIds) {
+		try {
+			for(Long goodsId:goodsIds){
+				File file = new File(pagedir + goodsId + ".html");
+				if(file.exists()){
+					//文件存在则删除
+					file.delete();
+				}
+			}
+			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

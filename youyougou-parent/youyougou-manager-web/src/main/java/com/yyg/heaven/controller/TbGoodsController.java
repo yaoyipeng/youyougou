@@ -2,15 +2,17 @@ package com.yyg.heaven.controller;
 
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yyg.heaven.entity.Result;
-import com.yyg.heaven.page.service.ItemPageService;
 import com.yyg.heaven.pojo.TbGoods;
 import com.yyg.heaven.pojo.TbItem;
-import com.yyg.heaven.search.service.ItemSearchService;
 import com.yyg.heaven.service.ITbGoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jms.Destination;
 import java.util.List;
 
 /**
@@ -28,20 +30,31 @@ public class TbGoodsController {
     @Reference
     private ITbGoodsService tbGoodsService;
 
-    @Reference
-    private ItemSearchService itemSearchService;
+    /*@Reference
+    private ItemSearchService itemSearchService;*/
+    @Autowired
+    private Destination queueSolrDestination;//用于发送solr导入的消息
 
-    @Reference(timeout=40000)
-    private ItemPageService itemPageService;
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    /*@Autowired
+    private Destination queueSolrDeleteDestination;//用户在索引库中删除记录*/
+
+    @Autowired
+    private Destination topicPageDestination;
+
+    /*@Reference(timeout=40000)
+    private ItemPageService itemPageService;*/
 
     /**
      * 生成静态页（测试）
      * @param goodsId
      */
-    @RequestMapping("/genHtml")
+    /*@RequestMapping("/genHtml")
     public void genHtml(Long goodsId){
         itemPageService.genItemHtml(goodsId);
-    }
+    }*/
 
     /**
      * 批量逻辑删除
@@ -57,6 +70,12 @@ public class TbGoodsController {
                 tbGoods.setId(id);
                 tbGoodsService.updateById(tbGoods);
             }
+            /*jmsTemplate.send(queueSolrDeleteDestination, new MessageCreator() {
+                @Override
+                public Message createMessage(Session session) throws JMSException {
+                    return session.createObjectMessage(ids);
+                }
+            });*/
 //            itemSearchService.deleteByGoodsIds(Arrays.asList(ids));
             return new Result(true, "删除成功");
         } catch (Exception e) {
@@ -166,14 +185,20 @@ public class TbGoodsController {
                 List<TbItem> itemList = tbGoodsService.findItemListByGoodsIdandStatus(ids, status);
                 //调用搜索接口实现数据批量导入
                 if(itemList.size()>0){
-                    itemSearchService.importList(itemList);
+//                    itemSearchService.importList(itemList);
+                    final String jsonString = JSON.toJSONString(itemList);
+                    jmsTemplate.send(queueSolrDestination, session -> session.createTextMessage(jsonString));
                 }else{
                     System.out.println("没有明细数据");
                 }
                 //静态页生成
-                for(Long goodsId:ids){
-                    itemPageService.genItemHtml(goodsId);
+                for(final Long goodsId:ids){
+                    jmsTemplate.send(topicPageDestination, session -> session.createTextMessage(goodsId+""));
                 }
+                //静态页生成
+                /*for(Long goodsId:ids){
+                    itemPageService.genItemHtml(goodsId);
+                }*/
             }
             return new Result(true, "成功");
         } catch (Exception e) {

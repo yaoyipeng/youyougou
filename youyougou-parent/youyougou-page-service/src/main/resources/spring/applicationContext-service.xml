@@ -9,10 +9,11 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <!--服务的提供方：连到注册中心-->
-	<dubbo:protocol name="dubbo" port="20885"></dubbo:protocol>
+	<!--<dubbo:protocol name="dubbo" port="20885"></dubbo:protocol>
 	<dubbo:application name="youyougou-page-service"/>
     <dubbo:registry address="zookeeper://192.168.25.130:2181"/>
-    <dubbo:annotation package="com.yyg.heaven.page.service.impl" />
+    <dubbo:annotation package="com.yyg.heaven.page.service.impl" />-->
+	<context:component-scan base-package="com.yyg.heaven.page.service.impl"/>
 	<bean id="freemarkerConfig"
 		  class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath" value="/WEB-INF/ftl/" />
