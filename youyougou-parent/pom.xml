@@ -25,6 +25,9 @@
         <module>youyougou-page-interface</module>
         <module>youyougou-page-service</module>
         <module>youyougou-page-web</module>
+        <module>youyougou-user-interface</module>
+        <module>youyougou-user-service</module>
+        <module>youyougou-user-web</module>
     </modules>
     <packaging>pom</packaging>
 
